@@ -22,32 +22,32 @@ const ProductosView = () => {
   const [editingProducto, setEditingProducto] = useState(null);
   const [deleteDialog, setDeleteDialog] = useState({ open: false, producto: null });
 
-  // Simulamos datos iniciales
+  // Fetch productos from API
   useEffect(() => {
-    if (productos.length === 0) {
-      const productosSimulados = [
-        {
-          id_producto: 1,
-          nombre: 'Mango Tommy',
-          descripcion: 'Mango premium tipo Tommy, dulce y jugoso',
-          precio: 2500
-        },
-        {
-          id_producto: 2,
-          nombre: 'Mango Azúcar',
-          descripcion: 'Mango tradicional muy dulce',
-          precio: 2000
-        },
-        {
-          id_producto: 3,
-          nombre: 'Mango Verde',
-          descripcion: 'Mango verde para ensaladas',
-          precio: 1500
+    const fetchProductos = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('http://localhost:3000/api/productos');
+        if (!response.ok) {
+          throw new Error('Error al cargar los productos');
         }
-      ];
-      setProductos(productosSimulados);
-    }
-  }, [productos.length, setProductos]);
+        const data = await response.json();
+        setProductos(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error('Error al cargar productos:', error);
+        toast({
+          title: "Error",
+          description: error.message || "No se pudieron cargar los productos. Verifica que el servidor esté en ejecución.",
+          variant: "destructive"
+        });
+        setProductos([]); // Asegurarse de que productos sea un array vacío en caso de error
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProductos();
+  }, [setProductos, setLoading]);
 
   const handleEdit = (producto) => {
     setEditingProducto(producto);

@@ -101,23 +101,37 @@ const ProductoModal = ({ isOpen, onClose, producto }) => {
           description: `${productoData.nombre} ha sido actualizado correctamente.`
         });
       } else {
-        // Crear nuevo producto
-        const nuevoProducto = {
-          ...productoData,
-          id_producto: Date.now() // Simulamos un ID único
-        };
+        // Crear nuevo producto en el backend
+        const response = await fetch('http://localhost:3000/api/productos', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(productoData)
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Error al crear el producto');
+        }
+
+        const nuevoProducto = await response.json();
+        
+        // Actualizar el estado global con el nuevo producto
         addProducto(nuevoProducto);
+        
         toast({
-          title: "Producto creado",
-          description: `${productoData.nombre} ha sido agregado al inventario.`
+          title: "¡Producto creado!",
+          description: `${productoData.nombre} ha sido agregado al inventario correctamente.`
         });
       }
 
       onClose();
     } catch (error) {
+      console.error('Error al guardar el producto:', error);
       toast({
         title: "Error",
-        description: `No se pudo ${isEditing ? 'actualizar' : 'crear'} el producto.`,
+        description: error.message || `No se pudo ${isEditing ? 'actualizar' : 'crear'} el producto.`,
         variant: "destructive"
       });
     } finally {
