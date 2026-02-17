@@ -24,8 +24,8 @@ const VentaDetalleModal = ({ isOpen, onClose, venta: initialVenta }) => {
       try {
         // Primero obtenemos los datos principales de la venta
         const [ventaResponse, detallesResponse] = await Promise.all([
-          fetch(`http://localhost:3000/api/ventas/${initialVenta.id_venta}`),
-          fetch(`http://localhost:3000/api/detalle_venta/${initialVenta.id_venta}`)
+          fetch(`${import.meta.env.VITE_API_URL}/api/ventas/${initialVenta.id_venta}`),
+          fetch(`${import.meta.env.VITE_API_URL}/api/detalle_venta/${initialVenta.id_venta}`)
         ]);
         
         if (!ventaResponse.ok) {

@@ -27,7 +27,7 @@ const ProveedoresView = () => {
     const fetchProveedores = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:3000/api/proveedores');
+        const response = await fetch('${import.meta.env.VITE_API_URL}/api/proveedores');
         
         if (!response.ok) {
           throw new Error('Error al cargar los proveedores');
@@ -63,7 +63,7 @@ const ProveedoresView = () => {
     if (deleteDialog.proveedor) {
       try {
         setLoading(true);
-        const response = await fetch(`http://localhost:3000/api/proveedores/${deleteDialog.proveedor.id_proveedor}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/proveedores/${deleteDialog.proveedor.id_proveedor}`, {
           method: 'DELETE'
         });
 

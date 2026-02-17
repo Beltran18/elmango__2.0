@@ -33,7 +33,7 @@ const RegisterForm = ({ onToggleForm }) => {
   const verificarUsuarioExistente = async (documento, email) => {
     try {
       // Verificar por documento
-      const response = await fetch(`http://localhost:3000/api/usuarios/${documento}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/usuarios/${documento}`);
       
       if (response.ok) {
         const usuario = await response.json();
@@ -45,7 +45,7 @@ const RegisterForm = ({ onToggleForm }) => {
       }
       
       // Verificar por email
-      const responseEmail = await fetch('http://localhost:3000/api/usuarios');
+      const responseEmail = await fetch(`${import.meta.env.VITE_API_URL}/api/usuarios`);
       if (responseEmail.ok) {
         const usuarios = await responseEmail.json();
         const usuarioConEmail = usuarios.find(u => u.email === email);
@@ -109,7 +109,7 @@ const RegisterForm = ({ onToggleForm }) => {
       }
 
       // Llamada a la API de registro
-      const apiUrl = 'http://localhost:3000/api/usuarios';
+      const apiUrl = `${import.meta.env.VITE_API_URL}/api/usuarios`;
       console.log('Enviando solicitud a:', apiUrl);
       
       const response = await fetch(apiUrl, {

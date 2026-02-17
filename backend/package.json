@@ -7,10 +7,9 @@
   "scripts": {
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
-    
   },
   "dependencies": {
-    "cors": "^2.8.5",
+    "cors": "^2.8.6",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "mysql2": "^3.14.2"

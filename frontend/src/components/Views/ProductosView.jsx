@@ -27,7 +27,7 @@ const ProductosView = () => {
     const fetchProductos = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:3000/api/productos');
+        const response = await fetch('${import.meta.env.VITE_API_URL}/api/productos');
         if (!response.ok) {
           throw new Error('Error al cargar los productos');
         }
@@ -62,7 +62,7 @@ const ProductosView = () => {
     if (deleteDialog.producto) {
       try {
         setLoading(true);
-        const response = await fetch(`http://localhost:3000/api/productos/${deleteDialog.producto.id_producto}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/productos/${deleteDialog.producto.id_producto}`, {
           method: 'DELETE',
         });
 

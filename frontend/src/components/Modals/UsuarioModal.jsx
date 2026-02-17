@@ -109,7 +109,7 @@ const UsuarioModal = ({ isOpen, onClose, usuario }) => {
       if (isEditing) {
         // Actualizar usuario existente en el backend
         const response = await fetch(
-          `http://localhost:3000/api/usuarios/${usuario.documento}`,
+          `${import.meta.env.VITE_API_URL}/api/usuarios/${usuario.documento}`,
           {
             method: 'PUT',
             headers: {
@@ -134,7 +134,7 @@ const UsuarioModal = ({ isOpen, onClose, usuario }) => {
         });
       } else {
         // Crear nuevo usuario
-        const response = await fetch('http://localhost:3000/api/usuarios', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/usuarios`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -67,7 +67,7 @@ const CarritoModal = ({ isOpen, onClose }) => {
       };
 
       // Enviar la venta al backend
-      const response = await fetch('http://localhost:3000/api/ventas', {
+      const response = await fetch('${import.meta.env.VITE_API_URL}/api/ventas', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

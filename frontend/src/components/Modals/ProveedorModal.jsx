@@ -96,7 +96,7 @@ const ProveedorModal = ({ isOpen, onClose, proveedor }) => {
       let response;
       if (isEditing) {
         // Actualizar proveedor existente
-        response = await fetch(`http://localhost:3000/api/proveedores/${proveedor.id_proveedor}`, {
+        response = await fetch(`${import.meta.env.VITE_API_URL}/api/proveedores/${proveedor.id_proveedor}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ const ProveedorModal = ({ isOpen, onClose, proveedor }) => {
         });
       } else {
         // Crear nuevo proveedor
-        response = await fetch('http://localhost:3000/api/proveedores', {
+        response = await fetch('${import.meta.env.VITE_API_URL}/api/proveedores', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

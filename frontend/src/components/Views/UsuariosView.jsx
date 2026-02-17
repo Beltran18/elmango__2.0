@@ -25,7 +25,7 @@ const UsuariosView = () => {
   const cargarUsuarios = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:3000/api/usuarios');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/usuarios`);
       
       if (!response.ok) {
         throw new Error('Error al cargar los usuarios');
@@ -65,7 +65,7 @@ const UsuariosView = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:3000/api/usuarios/${deleteDialog.usuario.documento}`, 
+        `${import.meta.env.VITE_API_URL}/api/usuarios/${deleteDialog.usuario.documento}`, 
         {
           method: 'DELETE'
         }

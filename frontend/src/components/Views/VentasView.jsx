@@ -15,7 +15,7 @@ const VentasView = () => {
   useEffect(() => {
     const fetchVentas = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/ventas');
+        const response = await fetch('${import.meta.env.VITE_API_URL}/api/ventas');
         
         if (!response.ok) {
           const errorData = await response.json();

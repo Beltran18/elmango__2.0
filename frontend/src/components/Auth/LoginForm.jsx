@@ -29,7 +29,7 @@ const LoginForm = ({ onToggleForm }) => {
   const verificarCredenciales = async (email, contraseña) => {
     try {
       // Primero obtenemos todos los usuarios
-      const response = await fetch('http://localhost:3000/api/usuarios');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/usuarios`);
       
       if (!response.ok) {
         throw new Error('Error al verificar las credenciales');

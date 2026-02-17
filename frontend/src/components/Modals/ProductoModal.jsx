@@ -95,7 +95,7 @@ const ProductoModal = ({ isOpen, onClose, producto }) => {
 
       if (isEditing) {
         // Actualizar producto existente en el backend
-        const response = await fetch(`http://localhost:3000/api/productos/${producto.id_producto}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/productos/${producto.id_producto}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ const ProductoModal = ({ isOpen, onClose, producto }) => {
         });
       } else {
         // Crear nuevo producto en el backend
-        const response = await fetch('http://localhost:3000/api/productos', {
+        const response = await fetch('${import.meta.env.VITE_API_URL}/api/productos', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
